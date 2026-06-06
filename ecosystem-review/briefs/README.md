@@ -11,6 +11,19 @@ Execute in dependency order. Each is a self-contained executor handoff.
 | EX-4 | ✅ Archive Realm's frozen 80% | Make live ≠ dead legible | realm/_archive | move never delete |
 | EX-5 | ✅ Genesis safety gates | **Prerequisite for revival** | ~/scripts/genesis-core | do before genesis-core starts |
 | EX-6 | ✅ Index the brain-* engine | Cleanup, lowest urgency | scripts (BRAIN_INDEX.md) | classify only |
+| AP-01 | ✅ Taskboard — /tasks page | Aperture improvement | aperture | read-only |
+| AP-01b | ✅ Taskboard UX (copy, badges, refresh) | Aperture improvement | aperture | read-only |
+| GX-01 | ✅ Compact live-state.md | Genesis revival prerequisite — stale knowledge base | genesis live-state only | read/write live-state, no service changes |
+| GX-02 | ✅ Session-limit detection in genesis-core | Genesis revival prerequisite — silent failure mode | ~/scripts/genesis-core | syntax change only, freeze stays active |
+| GX-03 | 🔲 Live context injection | Fixes stale knowledge — injects TASKS.md + CONTEXT.md + git log into every call | ~/scripts/genesis-core | adds reads to system prompt |
+| GX-04 | ✅ Role constraints + verification-first rule | Prevents garbage briefs — explicit scope boundary + verify-before-claim rule | ~/scripts/genesis-core | system prompt string only |
+| GX-05 | 🔲 Tick context isolation | Ticks get fresh context, not stale conversation history — cheaper + more accurate | ~/scripts/genesis-core | changes what gets passed to call_api() |
+| GX-06 | ✅ Async summarize fix | maybe_summarize() blocks the event loop for 30–90s — drops Telegram messages | ~/scripts/genesis-core | async/await change only |
+| GX-07 | ✅ Health heartbeat file | Write ~/.genesis-heartbeat each tick — external monitors can detect hung processes | ~/scripts/genesis-core | adds 3 lines |
+
+## Architecture rationale
+See `ecosystem-review/GENESIS_ARCHITECTURE.md` for the full design doc.
+GX-03 + GX-04 can run in parallel (different functions). GX-05 depends on GX-03 (ticks rely on system prompt for state after history is removed).
 
 ## Handoff to executor (per brief)
 > Read `~/agent-infra/agents/executor.md`. Then read `~/agent-infra/ecosystem-review/briefs/EX-N-*.md` and implement it. Report raw verify output back to the architect.

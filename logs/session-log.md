@@ -42,3 +42,18 @@ Done:
 In progress: nothing
 Decisions: D-004 (B2 retroactive acceptance); see SYNTRA/.agent/DECISIONS.md
 Next: PO decision on storefront direction → architect writes storefront brief
+
+## 2026-06-06 — agent-infra + SYNTRA — Architect (instance X)
+Opened: ~10:07 | Closed: ~10:15
+Tasks touched: S-02, S-03 (SYNTRA); AP-01b (aperture/agent-infra)
+Done:
+  - Accepted AP-01b (taskboard UX: copy buttons, badges, collapse, refresh) — build clean, curl verified
+  - Accepted S-02 (affiliate config layer) — /api/config HTTP 200, link construction correct, 31/31 pass
+    - Found: executor's productCard.js xc-auth pre-existing change broke 1 test; architect fixed (1-line)
+  - Conditionally accepted S-03 (genesis curation) — code correct, 31/31 pass
+    - BLOCKED: NocoDB cloud disallows field creation via API (all /columns endpoints 404)
+    - Fixed: xc-auth → xc-token in add-genesis-pick-field.js (correct header, wrong endpoint)
+    - PO action required: add "Genesis Pick" (Checkbox) field in NocoDB UI
+In progress: nothing
+Decisions: none new
+Next: nothing pending — all tasks done, AGENTS.md written, worktree protocol written
