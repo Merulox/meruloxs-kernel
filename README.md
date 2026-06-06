@@ -1,4 +1,4 @@
-# Agent Infrastructure
+# Merulox's Kernel
 
 **A governance layer for multi-agent AI development.**
 
@@ -147,12 +147,18 @@ The project currently using this in production: [SYNTRA](https://github.com/Meru
 
 ---
 
+## Name
+
+This is **Merulox's Kernel** — the kernel layer of a personal software stack. Everything else (SYNTRA, Genesis, Aperture) runs on top of it. The name reflects function, not scale.
+
+---
+
 ## Ecosystem context
 
 This repo is the methodology layer of a broader system:
 
 ```
-agent-infra  ──  how we build (this repo — governs all)
+meruloxs-kernel  ──  how we build (this repo — governs all)
 SYNTRA       ──  what we build (curated EDC retail product engine)
 merulox.com  ──  public portfolio
 ```
