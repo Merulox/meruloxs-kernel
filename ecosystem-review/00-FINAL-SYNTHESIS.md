@@ -89,3 +89,9 @@ In priority order — each is a self-contained brief:
 ## The one-sentence verdict
 
 You built a system that *describes* an empire and *contains* four genuinely excellent ideas (the monitor, drift-detection, the doctrine, the architect/executor/reviewer method) plus one shippable business (SYNTRA) — buried under unfinished scaffolding; the path forward is to **subtract the scaffolding, back up and wire the real parts, and ship.**
+
+---
+
+## DECISION LOG (post-review)
+
+- **2026-06-05 — REVIVE, not retire.** PO chose to keep Genesis/Realm alive. Consequence: EX-5 (Genesis safety gates) is a hard prerequisite — genesis-core stays down until the suicide guard + kill-switch land. Executor briefs written: `briefs/EX-1…EX-6`.
