@@ -10,10 +10,17 @@ Implement the four safety fixes that make Genesis safe to bring back online: (A3
 genesis-core killed itself 2026-04-28 via an unguarded `bash_exec` SIGKILL on its own service. It has no kill-switch, a TOOL_CALL_LIMIT of 3 (silently truncates complex tasks), and a 120s bash timeout (silently fails on >2min scripts). Reviving without these repeats the failure.
 
 ## FILES IT OWNS
-- `~/projects/genesis/daemon.py` (and/or `agent.py` — whichever implements bash_exec + limits; inspect both)
-- A new `~/scripts/genesis-freeze` (the hard kill-switch) — or extend existing `genesis-kill-switch` if present (check first)
+- `~/scripts/genesis-core` — this is where bash_exec, FORBIDDEN_PATTERNS, FREEZE_FILE, and the agentic loop all live (confirmed by architect)
+- A new `~/scripts/genesis-freeze` if it doesn't exist (check first: `ls ~/scripts/genesis-freeze`)
+
+## WHAT ARCHITECT FOUND (read before implementing)
+- **A3**: `FORBIDDEN_PATTERNS` list already exists in `exec_tool()` (~line 230) — **extend it**, don't rewrite. Add missing patterns: `systemctl.*stop.*genesis`, `systemctl.*disable.*genesis`, `pkill.*python`, `rm.*-rf.*obsidian`, `> ~/obsidian`, `rm.*genesis-core`.
+- **A4**: `FREEZE_FILE` check already exists at startup (~line 822) — **already done**. Skip A4.
+- **B3**: Find the agentic loop in genesis-core that calls the Anthropic API. Look for a `while` loop that accumulates tool calls. Add a `MAX_TOOL_CALLS` guard (≥25) that breaks the loop if exceeded, logs a warning, and returns.
+- **B4**: `timeout = min(int(inputs.get("timeout", 60)), 300)` — raise the cap from 300 to 600.
 
 ## DO NOT TOUCH
+- `~/projects/genesis/daemon.py`, `agent.py` — the work is in genesis-core, not these
 - Genesis identity/memory files in `~/obsidian/...` (behavior only, not soul)
 - genesis.nix service wiring (no service changes in this brief)
 
@@ -31,12 +38,12 @@ genesis-core killed itself 2026-04-28 via an unguarded `bash_exec` SIGKILL on it
 
 ## VERIFY WITH
 ```bash
-grep -nE 'TOOL_CALL_LIMIT|timeout' ~/projects/genesis/daemon.py ~/projects/genesis/agent.py
-grep -nE 'blacklist|genesis-core|SIGKILL|freeze' ~/projects/genesis/daemon.py
-ls ~/scripts/genesis-freeze && echo "kill-switch present"
-test -f ~/.genesis-frozen && echo "freeze flag wired"
+python3 -c "import ast; ast.parse(open('/home/merulox/scripts/genesis-core').read()); print('syntax OK')"
+grep -n "FORBIDDEN_PATTERNS" ~/scripts/genesis-core
+grep -n "timeout.*300\|timeout.*600\|min.*timeout" ~/scripts/genesis-core
+grep -n "MAX_TOOL_CALLS\|tool_call.*limit\|tool.*count" ~/scripts/genesis-core
 ```
-Report the bash_exec guard refusal as raw output (a safe dry-run that proves it blocks self-kill).
+Report the FORBIDDEN_PATTERNS list in full (paste the actual list). Confirm B4 timeout cap value.
 
 ## OUT OF SCOPE
 - Enabling autostart / actually reviving (separate step, after architect verifies these)
