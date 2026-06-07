@@ -8,6 +8,26 @@ It defines five roles, a task lifecycle, a brief format, session recovery protoc
 
 ---
 
+## The ambition
+
+AI agents make execution cheap. They do not automatically make execution
+coherent.
+
+Merulox's Kernel is an attempt to build the missing institutional layer: a
+durable operating model in which specialized agents can enter a project,
+recover its state, understand their authority, produce inspectable work, verify
+claims against reality, and leave the next session less confused than the last.
+
+The long-term goal is not a larger prompt library. It is a governance substrate
+for increasingly autonomous development: explicit roles, versioned decisions,
+recoverable state, bounded authority, independent review, and evidence-backed
+completion.
+
+This repository remains methodology-only. Its power comes from making behavior
+and responsibility explicit, not from becoming another runtime.
+
+---
+
 ## The core insight
 
 **"The executor said it's done" is not done.**
