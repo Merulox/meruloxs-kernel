@@ -13,7 +13,7 @@ Execute in dependency order. Each is a self-contained executor handoff.
 | EX-6 | `done` | Index the brain-* engine | Cleanup, lowest urgency | scripts (BRAIN_INDEX.md) | classify only |
 | AP-01 | `done` | Taskboard — /tasks page | Aperture improvement | aperture | read-only |
 | AP-01b | `done` | Taskboard UX (copy, badges, refresh) | Aperture improvement | aperture | read-only |
-| AP-02 | `briefed` | Codex launch buttons + instance monitoring | Launch Codex from Aperture; watch progress in-dashboard | aperture | spawns child processes |
+| AP-02 | `done` | Codex launch buttons + instance monitoring | Launch Codex from Aperture; watch progress in-dashboard | aperture | spawns child processes |
 | GX-01 | `done` | Compact live-state.md | Genesis revival prerequisite — stale knowledge base | genesis live-state only | read/write live-state, no service changes |
 | GX-02 | `done` | Session-limit detection in genesis-core | Genesis revival prerequisite — silent failure mode | ~/scripts/genesis-core | syntax change only, freeze stays active |
 | GX-03 | `done` | Live context injection | Fixes stale knowledge — injects TASKS.md + CONTEXT.md + git log into every call | ~/scripts/genesis-core | adds reads to system prompt |
