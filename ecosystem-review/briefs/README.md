@@ -18,7 +18,7 @@ Execute in dependency order. Each is a self-contained executor handoff.
 | GX-02 | `done` | Session-limit detection in genesis-core | Genesis revival prerequisite — silent failure mode | ~/scripts/genesis-core | syntax change only, freeze stays active |
 | GX-03 | `done` | Live context injection | Fixes stale knowledge — injects TASKS.md + CONTEXT.md + git log into every call | ~/scripts/genesis-core | adds reads to system prompt |
 | GX-04 | `done` | Role constraints + verification-first rule | Prevents garbage briefs — explicit scope boundary + verify-before-claim rule | ~/scripts/genesis-core | system prompt string only |
-| GX-05 | `briefed` | Tick context isolation | Ticks get fresh context, not stale conversation history — cheaper + more accurate | ~/scripts/genesis-core | changes what gets passed to call_api() |
+| GX-05 | `done` | Tick context isolation | Ticks get fresh context, not stale conversation history — cheaper + more accurate | ~/scripts/genesis-core | changes what gets passed to call_api() |
 | GX-06 | `done` | Async summarize fix | maybe_summarize() blocks the event loop for 30–90s — drops Telegram messages | ~/scripts/genesis-core | async/await change only |
 | GX-07 | `done` | Health heartbeat file | Write ~/.genesis-heartbeat each tick — external monitors can detect hung processes | ~/scripts/genesis-core | adds 3 lines |
 
