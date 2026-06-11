@@ -23,6 +23,7 @@ Execute in dependency order. Each is a self-contained executor handoff.
 | AP-06 | `done` | Backup status in system health panel | backup-r2 runs daily but has no visibility in dashboard | aperture | read-only | — |
 | AP-07 | `briefed` | Executor escalation widget | Exit-0-but-blocked jobs are currently invisible; surface them in taskboard | aperture | read-only | — |
 | WEB-01 | `done` | Fix log-digest — restore daily merulox.com log tab | claude-ops pause blocks API call since May 17; auto-deploy commented out | log-digest.service | one paid Claude call/day; Cloudflare Pages deploy | — |
+| WEB-02 | `briefed` | Media/attachments on /thinking | X posts with images render as plain text — missing visual context | ~/website/extension + thinking.astro | read-only | — |
 | GX-01 | `done` | Compact live-state.md | Genesis revival prerequisite — stale knowledge base | genesis live-state only | read/write live-state, no service changes | — |
 | GX-02 | `done` | Session-limit detection in genesis-core | Genesis revival prerequisite — silent failure mode | ~/scripts/genesis-core | syntax change only, freeze stays active | — |
 | GX-03 | `done` | Live context injection | Fixes stale knowledge — injects TASKS.md + CONTEXT.md + git log into every call | ~/scripts/genesis-core | adds reads to system prompt | — |
