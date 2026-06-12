@@ -31,6 +31,7 @@ Execute in dependency order. Each is a self-contained executor handoff.
 | GX-05 | `done` | Tick context isolation | Ticks get fresh context, not stale conversation history — cheaper + more accurate | ~/scripts/genesis-core | changes what gets passed to call_api() | — |
 | GX-06 | `done` | Async summarize fix | maybe_summarize() blocks the event loop for 30–90s — drops Telegram messages | ~/scripts/genesis-core | async/await change only | — |
 | GX-07 | `done` | Health heartbeat file | Write ~/.genesis-heartbeat each tick — external monitors can detect hung processes | ~/scripts/genesis-core | adds 3 lines | — |
+| MO-01 | `review` | Money panel in command-center | Audit G-01 — 3 dashboards, none shows a dollar; loop A+B | ~/scripts/command-center | read-only | — |
 
 ## Architecture rationale
 See `ecosystem-review/GENESIS_ARCHITECTURE.md` for the full design doc.
