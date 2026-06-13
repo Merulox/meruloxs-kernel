@@ -4,6 +4,9 @@
 **Maintainer:** Architect  
 **Source of truth:** `ecosystem-review/` docs
 
+> **SUPERSEDED 2026-06-11** — current map + full forensic audit at
+> `ecosystem-review/audit-2026-06-11/` (start with `EXECUTIVE_REPORT.md`).
+
 ---
 
 ## The eight-layer mental model

@@ -121,6 +121,16 @@ Paste raw command output — do not summarize.
 
 ---
 
+## Canonical state (declared 2026-06-12 — audit B-07/G-08)
+
+Exactly TWO task/memory canons. Everything else is frozen or informational:
+- **Project state:** `~/syntra/.agent/` (TASKS.md, CONTEXT.md, DECISIONS.md) — the pattern all projects copy
+- **Ecosystem work:** `ecosystem-review/briefs/README.md` status table
+
+Frozen (do not append work state to): `agent-infra/project/`, `mvaos/`, brain-task queue, vault `backlog.md` (life-not-engineering only). Aperture's taskboard is a *viewer*, never a source.
+
+**Flywheel rule (standing):** every brief names which loop it spins — Loop A (Boréal cash) or Loop B (SYNTRA compounding). "Neither" requires a written PO exception in DECISIONS.md or the brief header.
+
 ## Escalate to Product Owner when
 
 - Product direction changes

@@ -271,6 +271,8 @@ The "Send to Codex" button state is now managed by React — no more manual DOM 
 6. Permission request form submits and disappears on success
 7. `curl http://localhost:8788/api/tasks-data` — returns valid JSON with all four sections
 8. `curl http://localhost:8788/api/log-stream?jobId={running-id}` — returns SSE stream
+9. All implementation files committed to git (`git status` clean)
+10. Status updated to `review` in `~/agent-infra/ecosystem-review/briefs/README.md` for AP-03
 
 ---
 
@@ -318,6 +320,6 @@ A background research agent is producing a tech evaluation at `~/obsidian/knowle
 ```
 Read ~/agent-infra/agents/executor.md.
 Then read ~/agent-infra/ecosystem-review/briefs/AP-03-live-streaming.md and implement it.
-Report back using ~/agent-infra/templates/implementation-report.md.
-Paste raw command output — do not summarize.
+When done: commit all files, then set AP-03 status to `review` in ~/agent-infra/ecosystem-review/briefs/README.md.
+The architect will verify from the job log — do not paste output back.
 ```
