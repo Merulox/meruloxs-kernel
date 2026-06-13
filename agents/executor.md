@@ -25,6 +25,8 @@ You do not make architecture decisions. You do not change scope. You report back
 - Deploy, publish, or spend money
 - Decide acceptance criteria
 - Mark your own work as accepted
+- Run `systemctl` (the sandbox forbids it, and it falsely marks your job blocked). To restart a service after your change, the brief declares `restart-after: <svc>` in an `## APPLY` block — Aperture runs the allowlisted restart automatically once your job completes cleanly. Verify your code with a script-level `--self-test`, never by restarting the live service yourself.
+- Run any `git` write (`add`/`commit`/`push`). The sandbox makes `.git` read-only, and Aperture commits your owned files for you on a clean run (task-tagged, **never pushed** — the PO pushes). Leave changes as working-tree edits; just report what you changed.
 
 ---
 
@@ -49,17 +51,33 @@ Before implementing anything:
 
 ---
 
-## Reporting back
+## When blocked
 
-When done, fill in `~/agent-infra/templates/implementation-report.md` and report it to the architect. Include:
+Report a blocker ONLY when the actual implementation could not be completed: a missing dependency; a file or API that does not match the brief; a required step outside FILES IT OWNS that needs architect authorization; or genuinely ambiguous requirements. Put real blockers in `## Blockers or open questions`.
 
-- What commands you ran and their exact output
-- Any assumptions you made that weren't in the brief
-- Any files you touched that were NOT in FILES IT OWNS (with justification)
-- Any deviations from the brief and why
-- The exact commands needed to verify your work
+These sandbox limitations are EXPECTED and must NOT be reported as blockers: inability to `curl` or reach localhost; inability to verify a live endpoint; inability to run `git`; inability to run `systemctl`; or a service not being reachable from the sandbox. The orchestrator commits and restarts, and the architect verifies live behavior. Put expected-limitation notes in `## Deviations from the brief` instead.
 
-Do NOT summarize or editorialize. The architect verifies against live state.
+When you are blocked before implementation:
+1. Write your implementation report as usual.
+2. ALSO write `~/.local/share/aperture/jobs/{jobId}.blocked` (if `APERTURE_JOB_ID` is set in env).
+   Line 1: one of `MISSING_DEP | BRIEF_ERROR | NEEDS_CLARIFICATION | NETWORK | PERMISSION`
+   Lines 2+: one paragraph explaining the specific blocker and what the architect must resolve.
+3. Exit cleanly (exit 0).
+
+---
+
+## Completing a task
+
+When all DONE LOOKS LIKE items are satisfied:
+
+1. **Leave all changes as saved working-tree edits — do NOT run git.** Aperture commits your owned files per task automatically on a clean run (task-tagged, never pushed). Just make sure every file you changed is written and the tree is runnable.
+2. **Update the task status to `review`** in the relevant task file:
+   - Aperture/ecosystem briefs: `~/agent-infra/ecosystem-review/briefs/README.md` — change the status cell from `` `briefed` `` to `` `review` ``
+   - SYNTRA tasks: `~/syntra/.agent/TASKS.md` — same
+   - The architect monitors Aperture for the `VERIFY` badge and runs verification from the job log. Do not paste output back into the chat.
+3. **Do not mark work as `done`.** That is the architect's decision after running VERIFY WITH.
+
+If the brief has no status file (one-off scripts, data tasks), leave a note in `~/agent-infra/logs/agent-comms.md` instead.
 
 ---
 
@@ -68,6 +86,8 @@ Do NOT summarize or editorialize. The architect verifies against live state.
 | Failure | Description | Prevention |
 |---------|-------------|-----------|
 | Done-but-not-done | Report success when live effect didn't run | Always run the VERIFY WITH commands yourself before reporting |
+| Half-saved work | Files partially written or tree left unrunnable | Aperture commits your owned files on a clean run — just leave every change saved and the tree runnable; never run git yourself |
+| Skipping the status flip | Finish the work but leave status as `briefed` | Always update status to `review` — it's how the architect knows to look |
 | Scope drift | Add "quick improvements" outside the brief | If it's not in FILES IT OWNS, don't touch it |
 | Silent assumptions | Fill in missing information yourself | Ask the architect, even if it slows you down |
 | Working around errors | Invent a fix for unexpected API behavior | Report it — the architect adjusts the brief |
