@@ -25,11 +25,16 @@ After BX-01, the held senders are gated but the LIVE reactive paths still bypass
 5. **Rollout:** one script at a time — migrate, restart its service, verify with a live test (PO's phone for missed-call-bot: PO calls the Twilio number, hangs up, receives text-back), then next script.
 
 ## DONE LOOKS LIKE
-`grep -rn "api.twilio.com" ~/scripts/ --include="*" | grep -v boreal_send | grep -v inactive/` → empty. Every outbound SMS in the ecosystem appears in send-gateway-log.jsonl.
+Every **SMS send** routes through `boreal_send`. No direct Twilio **Messages** send remains outside the gateway. (Non-SMS Twilio calls — voice/TwiML, `IncomingPhoneNumbers.json` number config — are NOT sends and are allowed.) Every outbound SMS in the ecosystem appears in send-gateway-log.jsonl.
+
+> **CORRECTED 2026-06-14 (architect):** original criterion was `grep "api.twilio.com" == empty`, which is unsatisfiable — `missed-call-bot` legitimately hits `IncomingPhoneNumbers.json` to configure the webhook (not a send). That false criterion is why the first run blocked. Verified state: `reply-agent`, `sms-webhook`, and `missed-call-bot`'s `send_sms()` (line ~126) all already call `boreal_send.send()`; the only remaining `api.twilio.com` hits are number config. So the **code migration is effectively complete** — what's left is the PO live test below.
 
 ## VERIFY WITH (paste raw output)
 ```bash
-grep -rln "api.twilio.com" ~/scripts/ | grep -v "boreal_send\|inactive"        # empty
+# only SMS-SEND endpoints must be gone outside the gateway (Messages.json / send paths):
+grep -rln "Messages\.json\|messages\.create\|/Messages" ~/scripts/ | grep -v "boreal_send\|inactive"   # empty
+# confirm reactive senders call the gateway:
+grep -l "boreal_send" ~/scripts/reply-agent ~/scripts/sms-webhook ~/scripts/missed-call-bot
 for u in missed-call-bot sms-webhook sms-inbox; do systemctl --user is-active $u; done
 # Live test (PO participates): PO calls Twilio number, hangs up →
 tail -2 ~/.local/share/boreal-outreach/send-gateway-log.jsonl                  # reactive send logged, caller=missed-call-bot

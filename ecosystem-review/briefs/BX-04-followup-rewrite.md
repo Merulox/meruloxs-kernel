@@ -6,6 +6,8 @@
 
 > **RE-SCOPED 2026-06-12 (PO strategic reorientation — do not launch as-written):** copy doctrine now governed by `~/obsidian/knowledge/projects/boreal/acquisition-machine-2026-06-12.md` §4. Touches lead with painful outcomes, never the service; no AI talk; one hand-raise CTA per message (reply keyword / call / booking link); no meeting-ask, no presumptive-call closes. Architect must rewrite the 4-touch template specs to that standard before this brief is handed off. Templates remain DRAFT until PO sign-off (unchanged).
 
+> **ARCHITECT PREREQ DONE 2026-06-13:** `boreal-followup.service` (static) + `boreal-followup.timer` (disabled, inactive) are pre-created in `~/.config/systemd/user/` and daemon-reloaded. The executor must NOT create or enable them. Service `ExecStart=~/scripts/boreal-followup --send` — the engine must accept `--send`. Obsolete `follow-up-auto.*` / `follow-up-sequence.*` removal is **pending PO confirm** (all four already disabled+inactive, harmless if left until then).
+
 ## GOAL
 Replace seven overlapping follow-up scripts and the presumptive-call template pool with ONE sequence script, ONE template file, and copy that doesn't manufacture opt-outs.
 
