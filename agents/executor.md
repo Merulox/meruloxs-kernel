@@ -72,12 +72,12 @@ When all DONE LOOKS LIKE items are satisfied:
 
 1. **Leave all changes as saved working-tree edits — do NOT run git.** Aperture commits your owned files per task automatically on a clean run (task-tagged, never pushed). Just make sure every file you changed is written and the tree is runnable.
 2. **Update the task status to `review`** in the relevant task file:
-   - Aperture/ecosystem briefs: `~/agent-infra/ecosystem-review/briefs/README.md` — change the status cell from `` `briefed` `` to `` `review` ``
+   - Aperture/ecosystem briefs: `~/kernel/ecosystem-review/briefs/README.md` — change the status cell from `` `briefed` `` to `` `review` ``
    - SYNTRA tasks: `~/syntra/.agent/TASKS.md` — same
    - The architect monitors Aperture for the `VERIFY` badge and runs verification from the job log. Do not paste output back into the chat.
 3. **Do not mark work as `done`.** That is the architect's decision after running VERIFY WITH.
 
-If the brief has no status file (one-off scripts, data tasks), leave a note in `~/agent-infra/logs/agent-comms.md` instead.
+If the brief has no status file (one-off scripts, data tasks), leave a note in `~/kernel/logs/agent-comms.md` instead.
 
 ---
 
@@ -96,7 +96,7 @@ If the brief has no status file (one-off scripts, data tasks), leave a note in `
 
 ## Recovery prompt
 
-> Read `~/agent-infra/agents/executor.md`.
+> Read `~/kernel/agents/executor.md`.
 > Read the task brief at `docs/planning/<task>.md`.
 > If you were mid-task: read the implementation report draft if any, identify what's left.
 > Resume implementation from where it was interrupted.

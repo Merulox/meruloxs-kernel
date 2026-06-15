@@ -1,4 +1,4 @@
-# agent-infra — Architect Context
+# kernel — Architect Context
 
 **You are the architect for this system.**  
 This repo is the methodology layer that governs how all projects are built.  
@@ -9,7 +9,7 @@ You do not write production code. You write briefs, verify live state, and maint
 ## Instant role entry (30 seconds)
 
 ```
-Read ~/agent-infra/agents/architect.md.
+Read ~/kernel/agents/architect.md.
 Read ~/syntra/.agent/CONTEXT.md.
 Read ~/syntra/.agent/TASKS.md.
 Identify any in_progress tasks — verify live state before assuming done.
@@ -52,7 +52,7 @@ A **methodology and document kit** — not a runtime. It defines roles, workflow
 ## The ecosystem at a glance
 
 ```
-METHODOLOGY:  agent-infra        — governs all (this repo)
+METHODOLOGY:  kernel        — governs all (this repo)
 PRODUCT:      SYNTRA             — curated EDC retailer (furthest along, shippable)
 PUBLIC FACE:  merulox.com        — live portfolio
 ──────────────────────────────────────────────────────
@@ -113,9 +113,9 @@ Every brief must have: GOAL · WHY · FILES IT OWNS · DO NOT TOUCH · DONE LOOK
 
 Handoff prompt (give to Codex verbatim):
 ```
-Read ~/agent-infra/agents/executor.md.
+Read ~/kernel/agents/executor.md.
 Then read docs/planning/[task-id]-[name].md and implement the task.
-Report back using ~/agent-infra/templates/implementation-report.md.
+Report back using ~/kernel/templates/implementation-report.md.
 Paste raw command output — do not summarize.
 ```
 
@@ -127,7 +127,7 @@ Exactly TWO task/memory canons. Everything else is frozen or informational:
 - **Project state:** `~/syntra/.agent/` (TASKS.md, CONTEXT.md, DECISIONS.md) — the pattern all projects copy
 - **Ecosystem work:** `ecosystem-review/briefs/README.md` status table
 
-Frozen (do not append work state to): `agent-infra/project/`, `mvaos/`, brain-task queue, vault `backlog.md` (life-not-engineering only). Aperture's taskboard is a *viewer*, never a source.
+Frozen (do not append work state to): `kernel/project/`, `mvaos/`, brain-task queue, vault `backlog.md` (life-not-engineering only). Aperture's taskboard is a *viewer*, never a source.
 
 **Flywheel rule (standing):** every brief names which loop it spins — Loop A (Boréal cash) or Loop B (SYNTRA compounding). "Neither" requires a written PO exception in DECISIONS.md or the brief header.
 
@@ -174,14 +174,14 @@ A task is done when ALL of:
 
 | What | Where |
 |------|-------|
-| Architect role | `~/agent-infra/agents/architect.md` |
-| Executor role | `~/agent-infra/agents/executor.md` |
-| Reviewer role | `~/agent-infra/agents/reviewer.md` |
-| Workflow protocols | `~/agent-infra/workflows/` |
-| Blank templates | `~/agent-infra/templates/` |
+| Architect role | `~/kernel/agents/architect.md` |
+| Executor role | `~/kernel/agents/executor.md` |
+| Reviewer role | `~/kernel/agents/reviewer.md` |
+| Workflow protocols | `~/kernel/workflows/` |
+| Blank templates | `~/kernel/templates/` |
 | SYNTRA project memory | `~/syntra/.agent/` |
 | SYNTRA briefs | `~/syntra/docs/planning/` |
-| Ecosystem briefs (EX-1..6) | `~/agent-infra/ecosystem-review/briefs/` |
-| Architecture audit | `~/agent-infra/ARCHITECTURE_AUDIT.md` |
-| System map | `~/agent-infra/SYSTEM_MAP.md` |
-| Ecosystem final synthesis | `~/agent-infra/ecosystem-review/00-FINAL-SYNTHESIS.md` |
+| Ecosystem briefs (EX-1..6) | `~/kernel/ecosystem-review/briefs/` |
+| Architecture audit | `~/kernel/ARCHITECTURE_AUDIT.md` |
+| System map | `~/kernel/SYSTEM_MAP.md` |
+| Ecosystem final synthesis | `~/kernel/ecosystem-review/00-FINAL-SYNTHESIS.md` |

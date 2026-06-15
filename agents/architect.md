@@ -75,7 +75,7 @@ A brief without VERIFY WITH is not a brief — it's a wish.
 
 If you've lost context, run this:
 
-> Read `~/agent-infra/agents/architect.md`.
+> Read `~/kernel/agents/architect.md`.
 > Read `.agent/CONTEXT.md`.
 > Read `.agent/TASKS.md`.
 > Identify any `in_progress` tasks — verify live state before assuming they're complete.
@@ -96,4 +96,4 @@ Escalate to Product Owner immediately for:
 - Security-sensitive changes
 - Unresolved agent disagreements
 
-See `~/agent-infra/workflows/escalation.md` for protocol.
+See `~/kernel/workflows/escalation.md` for protocol.
