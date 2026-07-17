@@ -55,7 +55,7 @@ Do not send design escalations to the executor — they cannot resolve them.
 
 ## Review report format
 
-Fill in `~/agent-infra/templates/review-report.md`. Include:
+Fill in `~/kernel/templates/review-report.md`. Include:
 
 - Pass/fail for each DONE LOOKS LIKE criterion
 - Exact command output (paste, don't summarize)
@@ -78,7 +78,7 @@ Fill in `~/agent-infra/templates/review-report.md`. Include:
 
 ## Recovery prompt
 
-> Read `~/agent-infra/agents/reviewer.md`.
+> Read `~/kernel/agents/reviewer.md`.
 > Read the task brief at `docs/planning/<task>.md` — focus on DONE LOOKS LIKE and VERIFY WITH.
 > Read the implementation report.
 > Run the verify commands. Fill in the review report.

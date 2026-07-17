@@ -1,4 +1,4 @@
-# Agent Rules — agent-infra
+# Agent Rules — kernel
 
 This file is read automatically by Warp agents and Claude Code.
 

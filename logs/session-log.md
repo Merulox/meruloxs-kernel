@@ -112,3 +112,42 @@ Done:
 Decisions: sender go/no-go now gated on BX-01+BX-02 (recorded in signals.md + memory)
 Next: PO — call the lead, then approve BX-01/BX-02 briefs for writing.
 [2026-06-12 20:30] architect session: verified AP-10 (done) + BX-01 (review, live test pending window) + BX-02 P1 (approved w/ amendments, P2 GO); wrote AP-11; recorded PO acquisition-machine vision (vault) + re-scoped BX-04; next: BX-01 live test in window, relaunch BX-02 P2, launch BX-03, rewrite BX-04 templates, write BX-08
+
+## 2026-07-01 — Architect (PO-initiated SYNTRA audit)
+- Verified live state: DB 1750 CLEAN; prod STALE (pre-S-19: no pagination fields, /api/facets missing, sitemap 1002 URLs); main f1d4b5d pushed but never deployed.
+- Found 2 surviving 1000-cap call sites in main: handleSitemap + prerender.js:16.
+- Briefs written: S-21 (uncap sitemap/prerender, P1), S-22 (redeploy Railway [DEPLOY], P1), S-20 (shelf browse, P2). S-14 already briefed.
+- D-011 logged: planning sanctioned, execution still gated on PO go. CONTEXT.md/TASKS.md updated.
+
+## 2026-07-02 — SYNTRA revenue-readiness brief batch (architect, PO-sanctioned)
+PO asked for highest-leverage next briefs, then "write all of them". Wrote S-23 (Impact deeplink support, P1), S-24 (trust/disclosure layer, P1), S-25 (collection landing pages, P2 [DATA]), S-26 (conversion pass, P2, depends S-23), S-27 (Umami click report, P3). Logged D-013. TASKS.md + CONTEXT.md updated; stale "prod is pre-S-19" summary paragraph corrected. Execution stays gated (pause order 2026-06-26). PO inputs pending: Bellroy/Orbitkey applications, S-24 contact email + identity line, Umami API key.
+
+## 2026-07-02 (evening) — S-23/S-24 verification + AP-26 (architect)
+S-23 verified done (39/39 tests, single buildAffiliateUrl, wrap-mode exact). S-24 launched by PO accident with unmet inputs (D-014) — executor used the brief's proposed placeholders; verified clean (1753 routes, /about + footer live in dist); status review, gates on mailbox creation + wording confirm. Both commits LOCAL (main ahead 2, push gate held). Filed AP-26: SYNTRA panel launch gates + PO-input form via `<!-- gates: -->` brief convention; kernel template updated; S-25/S-26/S-27 retrofitted as test fixtures. Next: PO confirms mailbox/wording → push → S-26 launchable now, AP-26 launchable anytime.
+
+## 2026-07-03 — S-23/S-24 production deploy (architect, PO-approved)
+PO confirmed S-24 wording + created hello@ mailbox → pushed 1046046+2501ff3 (5494631..2501ff3). Railway auto-deploy fired (webhook working post-D-012). Prod verified: /about title correct, sitemap 1753 incl /about, footer live, total 1750, contact email present (Cloudflare email-obfuscation rewrites mailto — expected). S-23+S-24 done. Site is now Impact-ready (PD approval = config edit) and publisher-review-ready. Next: S-26 launchable (dep met); S-25 awaits copy approval; S-27 awaits UMAMI_API_KEY; AP-26 launchable anytime.
+
+## 2026-07-03 (late) — AP-27 brief (architect)
+PO greenlit the verify-agent idea, Stage 1 first. Stored @mirrorchamberbot token in ~/.secrets/mirrorchamber-bot.env (600), pre-verified delivery (getMe ok + test message to PO chat 2069131667). Wrote AP-27 (executor completion → Telegram notify; hook at launch-codex.ts:467 exit handler; failure isolation hard-required; Stage 2 LLM verify agent = future AP-28). README row added.
+
+## 2026-07-04 — Overnight executor batch verification + S-25 incident (architect)
+Overnight: S-25, S-26 (syntra) + AP-26 (aperture) executed. **S-25 ran with [DATA] gate unmet → 4 unapproved collection rows in shared prod DB → prod shelf showed 4 collections that 400'd on click. Remediated: active=false, prod verified restored (D-015).** Copy exported to syntra docs/planning/s25-seed-copy-review.md for PO approval. S-26 verified done (prerendered related links, priced CTA, 45/45) — executor dropped related.js+test, architect committed db745d9 (push without it breaks Railway build). AP-26 verified done (gate fields, 403, 409) — 409 guard was uncommitted, architect committed 7e5d374. D-010 orphan pattern now 3 occurrences. Unrelated process-monitor WIP left uncommitted in aperture (flagged, untouched). Syntra main ahead 3 (e415dd5, 563f92a, db745d9) — push awaits PO. AP-27 still briefed, launchable.
+
+## 2026-07-04 — S-25 deploy + activation (architect, PO-approved)
+PO approved seed copy → pushed main (2501ff3..db745d9), waited deploy, activated 4 collection rows, empty-commit rebuild (f0b323e) for prerender. Prod verified: 5 collection pages with unique prerendered titles, sitemap 1758, collection filters live (342/1157), S-26 related links live on prod product pages. S-25 done. GitNexus reindexed. Queue now: S-27 (gated on UMAMI_API_KEY), AP-27 (briefed, launchable). Standing PO items: Bellroy/Orbitkey applications, Peak Design approval watch.
+
+## 2026-07-04 (midday) — S-27 pivot to first-party events (architect)
+Umami API turned out Pro-gated ($20/mo) — S-27's "free API" premise was architect research error, owned in D-016. PO chose option 1 of 3: first-party /api/track + Supabase events table. PO approved [SCHEMA]; architect created events table via management API (201) + smoke-tested anon insert/select/delete. S-27 cancelled, S-27b briefed (dual-write beside umami calls, report reads Supabase, no gates, no recurring cost). Queue: S-27b + AP-27 both launchable, ungated.
+
+## 2026-07-04 (afternoon) — AP-27 + S-27b verification (architect)
+AP-27 "failure" was AP-16 false-blocked (sandbox: registry read-only, no outbound net, no systemctl) — code complete and correct on review. Architect committed f38ff34, restarted aperture, real Telegram smoke delivered, commander-registered mirror-chamber. Notify pipeline LIVE: every executor completion now pings PO. S-27b verified done: 50/50 tests, /api/track 204 + whitelist + DB row confirmed, report prints with zero-warning. Docs housekeeping ec3f4b7. Syntra main ahead 2 (5522266 + ec3f4b7) — S-27b tracking goes live on next PO-approved push. Standing: Bellroy/Orbitkey applications, PD approval watch.
+
+## 2026-07-04 (eod) — S-27b deployed (architect, PO-approved push)
+Pushed f0b323e..ec3f4b7, Railway deployed, end-to-end prod-verified: POST /api/track 204 → row landed in events table (cleaned). First-party click tracking LIVE on syntraworks.ca. All queues empty: D-013 batch + S-27b + AP-26 + AP-27 all done and deployed. Only PO revenue actions remain (Bellroy/Orbitkey applications, PD approval watch).
+
+## 2026-07-04 (late) — Affiliate application guidance + S-28/S-29 briefs (architect)
+Verified Bellroy = Rakuten (mid 43345, 7%, wrap-mode compatible — config note updated with exact linkTemplate) and Orbitkey = email-request only (press@orbitkey.com, pitch drafted for PO). Config dead URLs fixed. PO raised UI concern → architect verified POST /api/products/:id/save is publicly writable on prod (live no-op test). D-017: S-28 briefed (landing swap + fail-closed token auth, P1 — reviewers incoming), S-29 briefed (token-based visual pass, gated on 1wk click data). Queue: S-28 launchable now; S-29 gated (AP-26 enforces).
+
+## 2026-07-05 — Screenshot infra + S-29 content fixes (architect)
+PO identified two P0 brand issues on prod: double SYNTRA wordmark on landing hero, "GENESIS PICKS" internal agent label in public section. PO requested screenshot feedback loop infrastructure instead of one-off fixes. S-30 briefed (Playwright screenshot script + Aperture /design panel + weekly cron, ungated, launchable now). S-29 updated: P0 content fixes added to scope (remove hero wordmark, rename GENESIS PICKS → EDITOR'S PICKS), S-30 added as gate dependency, VERIFY WITH updated to require before/after screenshots. Gate timeline unchanged: click_report_reviewed ~2026-07-11. Queue: S-30 launchable now → S-29 unlocks ~2026-07-11.

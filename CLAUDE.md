@@ -52,13 +52,14 @@ A **methodology and document kit** — not a runtime. It defines roles, workflow
 ## The ecosystem at a glance
 
 ```
-METHODOLOGY:  kernel        — governs all (this repo)
-PRODUCT:      SYNTRA             — curated EDC retailer (furthest along, shippable)
+METHODOLOGY:  kernel         — governs all (this repo)
+PRIMARY:      Boréal Numérique   — revenue track, ALL-IN (A4-MACHINE, PO order 2026-06-26)
+PAUSED:       SYNTRA             — partner-origin EDC track; resumes after Boréal first client
 PUBLIC FACE:  merulox.com        — live portfolio
 ──────────────────────────────────────────────────────
-AGENT:        Genesis            — autonomous daemon (frozen; needs EX-5 before revival)
-ENVIRONMENT:  Realm + brain-*    — state substrate (80% frozen) + engine (unversioned)
-INTERFACE:    Aperture           — ops dashboard (live but reads stale data)
+AGENT:        Genesis            — autonomous daemon (frozen; do NOT revive beyond verifier tick)
+ENVIRONMENT:  Realm + brain-*    — brain-* stopped since 2026-06-03; only monitor/ + 3 hooks live
+INTERFACE:    Aperture           — ops dashboard (live; some feeds stale — see gap-audit 2026-06-28)
 KNOWLEDGE:    Obsidian vault     — long-term knowledge graph (injected into prompts)
 ```
 
@@ -68,21 +69,25 @@ See `SYSTEM_MAP.md` for full diagram. See `ecosystem-review/00-FINAL-SYNTHESIS.m
 
 ## Active work right now
 
-### SYNTRA — primary active project
+### Boréal Numérique — primary active track (A4-MACHINE, all-in)
 
-| Task | Status | Next action |
+The revenue lever. Machine is BUILT (BX-01..04 done) but HELD on two non-engineering PO gates.
+Live state: `~/projects/boreal/CONTEXT.md`. Signals: `~/.claude/projects/-home-merulox/memory/signals.md`.
+
+| Item | Status | Next action |
 |------|--------|-------------|
-| T-01, T-02, T-03, UI-01, UI-02 | done | — |
-| B1: Bellroy probe | **done (unrecorded)** | Update TASKS.md → `done`; review probe output |
-| B2: Bellroy normalize + ingest | briefed/backlog | Write B2 brief after reviewing B1 output |
+| 3 hot RESPONDED leads (PKP, Mercier, A.S Électrique) | re-open msgs drafted | Work manually via command-center LEADS tab — pure ACT |
+| 25 warm REPLIED leads | melting since 2026-06-13 | Follow up — perishable, paid-for asset |
+| Auto-senders (followup/campaign) | HELD | PO: CASL review + flip 8 DRAFT templates → APPROVED |
 
-SYNTRA project memory: `~/syntra/.agent/`  
-B1 probe: `node ~/syntra/src/cli/probe-bellroy.js` (runs clean)  
-B2 ingest script: `~/syntra/src/cli/ingest-bellroy.js` (executor wrote without brief — needs architect review)
+### SYNTRA — PAUSED until Boréal first client (PO order 2026-06-26)
 
-### Ecosystem — executor briefs approved, pending execution
+Partner-origin EDC track. Memory at `~/syntra/.agent/`. No SYNTRA/kernel architecture work until Boréal has a paying client.
 
-EX-1..EX-6 briefs at `ecosystem-review/briefs/`. Execute in order. **EX-1 first** (engine backup — loss prevention).
+### Ecosystem — see gap-audit 2026-06-28
+
+Current gap list: `~/obsidian/knowledge/projects/ecosystem/gap-audit-2026-06-28.md`.
+EX-1..EX-6 briefs at `ecosystem-review/briefs/` are largely historical — verify live state before acting on any.
 
 ---
 

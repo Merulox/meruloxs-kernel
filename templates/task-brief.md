@@ -3,7 +3,10 @@
 Status: ready for a builder / draft
 Written by: architect, [YYYY-MM-DD]
 
-Read `~/agent-infra/agents/executor.md` and `docs/operating-model.md` before starting.
+<!-- gates: depends=[TASK-IDs or empty]; inputs=[text values PO must provide, or empty]; confirms=[manual out-of-band actions, or empty] -->
+<!-- Machine-readable launch gate (AP-26). Aperture blocks "Send to Codex" until: every `depends` ID is done, every `inputs` value is provided (collected via textbox, written into this brief), every `confirms` box is ticked. Secrets go in `confirms` (checkbox that the manual step happened) — never in `inputs`. -->
+
+Read `~/kernel/agents/executor.md` before starting.
 
 ---
 
@@ -65,3 +68,10 @@ Things explicitly deferred — write them here to prevent scope drift.
 
 - [deferred feature or work]
 - [deferred feature or work]
+
+## EXECUTOR
+codex | opencode | either
+
+<!-- codex = launched via Aperture (default if field absent) -->
+<!-- opencode = run manually from terminal: cd <workroot> && opencode -->
+<!-- either = architect's choice at runtime -->
