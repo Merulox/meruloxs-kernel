@@ -55,7 +55,11 @@ Before implementing anything:
 
 Report a blocker ONLY when the actual implementation could not be completed: a missing dependency; a file or API that does not match the brief; a required step outside FILES IT OWNS that needs architect authorization; or genuinely ambiguous requirements. Put real blockers in `## Blockers or open questions`.
 
-These sandbox limitations are EXPECTED and must NOT be reported as blockers: inability to `curl` or reach localhost; inability to verify a live endpoint; inability to run `git`; inability to run `systemctl`; or a service not being reachable from the sandbox. The orchestrator commits and restarts, and the architect verifies live behavior. Put expected-limitation notes in `## Deviations from the brief` instead.
+These sandbox limitations are EXPECTED and must NOT be reported as blockers: inability to `curl` or reach localhost; inability to verify a live endpoint; inability to run `git`; inability to run `systemctl`; a service not being reachable from the sandbox; or a read-only/permission-denied filesystem error writing to paths outside FILES IT OWNS (state dirs, lock files, `.locks/*`). The orchestrator commits and restarts, and the architect verifies live behavior. Put expected-limitation notes in `## Deviations from the brief` instead.
+
+### Reporting contract
+
+Classification reads your report. If you completed the task: the `## Blockers or open questions` section must be exactly `None.` — not `None, but...` or `None for implementation, however...`. Any qualifier after "None" gets classified as a real blocker even when it only describes an expected sandbox limitation. Quote errors freely in Commands run / Deviations — quoting is encouraged and does not block. If you are genuinely blocked: state it in the Blockers section, or emit `MISSING_DEP` / `BRIEF_ERROR` / `NEEDS_CLARIFICATION` on its own line anywhere. Expected sandbox limits (no network, read-only registries, no systemctl, read-only lock/state dirs) are NOT blockers — list them as deviations and mark the task complete.
 
 When you are blocked before implementation:
 1. Write your implementation report as usual.
