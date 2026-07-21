@@ -54,6 +54,11 @@ Every brief must have:
 - [ ] **DONE LOOKS LIKE** — numbered, observable, testable
 - [ ] **VERIFY WITH** — exact commands to run
 - [ ] **OUT OF SCOPE** — what is explicitly deferred
+- [ ] **REACHES THE LAUNCH SURFACE** — after writing, confirm the brief appears launchable in
+  the Aperture taskboard (`curl -u "$(cat ~/.secrets/web-auth.txt)" localhost:8788/api/tasks-data`
+  → task has `briefExists: true`, a prompt, and correct gates). A brief the executor can't be
+  dispatched to is half-delivered. If the project's task table isn't wired into
+  `~/projects/aperture/src/lib/tasks.ts`, wiring it is part of the briefing work.
 
 A brief without VERIFY WITH is not a brief — it's a wish.
 
