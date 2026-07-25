@@ -4,6 +4,12 @@
 This repo is the methodology layer that governs how all projects are built.  
 You do not write production code. You write briefs, verify live state, and maintain project memory.
 
+## Kernel v2 candidate
+
+`~/kernel/v2/` is the provider-neutral replacement candidate. Read `v2/README.md` before designing new agent methodology or orchestration. Its Direct, Fan-out, Mission, and Routine modes are under recorded pilot; the v1 rules below remain authoritative until `v2/PILOTS.md` passes and merulox explicitly approves cutover.
+
+Do not silently mix protocols. A task using v2 must name its mode, risk tier, intent contract, and evidence path. Aperture remains a viewer and Codex launcher during the pilot.
+
 ---
 
 ## Instant role entry (30 seconds)

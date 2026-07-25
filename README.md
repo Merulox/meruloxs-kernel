@@ -1,51 +1,66 @@
 # merulox's kernel
 
-An operating model for building software with AI agents. Five roles, a task lifecycle, a brief format, and session recovery protocols — enough structure to keep a multi-agent project coherent across cold starts without enough overhead to slow anything down.
+A provider-neutral operating model for building software with AI agents: human authority, adaptive execution topology, isolated work, executable outcome gates, and a learning loop that makes the next run more reliable.
 
-This is what I actually use. [Aperture](https://github.com/merulox/aperture) is built with it.
+## Kernel v2 candidate
 
----
+[Kernel v2](v2/README.md) is now the candidate operating model.
 
-## The model
+It reorients the system around:
 
-Five roles that do not overlap:
+```text
+Kernel   = governance, topology selection, oracles, learning
+OMP      = local agent execution substrate
+Aperture = durable control and approval plane after cutover
+systemd  = predictable local automation
+Temporal = optional durable execution when demonstrated necessary
+```
+
+The accountable lead selects the least complex topology that fits the work:
+
+- **Direct** — one lead owns tightly coupled work end to end.
+- **Fan-out** — isolated workers execute genuinely independent leaves.
+- **Mission** — a planner preserves the milestone DAG while fresh workers implement leaves.
+- **Routine** — deterministic code owns repeated state transitions; agents handle ambiguity.
+
+Start with [`v2/README.md`](v2/README.md). Research basis:
+
+- [`docs/research/frontier-agentic-orchestration-2026-07-24.md`](docs/research/frontier-agentic-orchestration-2026-07-24.md)
+- [`docs/research/agentic-qa-gauntlets-2026-07-24.md`](docs/research/agentic-qa-gauntlets-2026-07-24.md)
+
+## Cutover status
+
+v2 is a candidate, not yet the active global protocol. v1 remains authoritative until the Direct, Fan-out, and Mission pilots in [`v2/PILOTS.md`](v2/PILOTS.md) pass and merulox explicitly approves activation.
+
+During the pilot:
+
+- `agents/`, `workflows/`, and `templates/` remain the v1 protocol;
+- v2 contracts and evidence are used only for recorded pilots or explicit Product Owner decisions;
+- Aperture remains a viewer and Codex launcher;
+- no provider-specific runtime is removed.
+
+## Kernel v1
+
+The original system uses five fixed roles:
 
 | Role | Who | Does |
-|------|-----|------|
-| Product Owner | me | direction, priorities, escalations |
-| Architect | Claude | briefs, verification, project memory |
-| Executor | Codex | implementation only |
-| Reviewer | Claude (separate session) | independent verification |
-| Specialist | any agent | research, data, design |
+|---|---|---|
+| Product Owner | merulox | Direction, priorities, escalations |
+| Architect | Claude | Briefs, verification, project memory |
+| Executor | Codex | Implementation only |
+| Reviewer | Claude in a separate session | Independent verification |
+| Specialist | Any agent | Research, data, design |
 
-A task moves through: `backlog → briefed → in_progress → review → done`. Nothing is "done" until the architect has run the VERIFY commands and confirmed live state.
+Its lifecycle is `backlog → briefed → in_progress → review → done`. Its durable insight remains active: nothing is done until the stated verification commands pass and live state confirms the outcome.
 
-## The brief format
+The v1 implementation lives in:
 
-Every executor handoff has:
-
-```
-GOAL
-WHY
-FILES IT OWNS
-DO NOT TOUCH
-DONE LOOKS LIKE
-VERIFY WITH
-OUT OF SCOPE
+```text
+agents/         provider-specific role definitions
+workflows/      session, handoff, and task lifecycle protocols
+templates/      brief, report, review, decision, bug, and handoff forms
+mvaos/          compact historical role documents
+ecosystem-review/  forensic audits and executor brief history
 ```
 
-The last three are the important ones. "Done looks like" is specific and falsifiable. "Verify with" is exact shell commands the architect runs. "Out of scope" is a firewall against scope creep mid-execution.
-
-## What's in here
-
-```
-agents/         role definitions — architect, executor, reviewer, specialist
-workflows/      session start, shutdown, handoff, task lifecycle protocols
-templates/      blank brief, report, review, decision, handoff forms
-mvaos/          compact role docs for smaller contexts
-ecosystem-review/  forensic audit of a live system + executor brief sequence
-```
-
-## Caveats
-
-This repo is a periodic snapshot. The live version lives locally and evolves faster than I push it.
+v1 will move under `archive/v1/` only after the v2 cutover gate passes. No automatic commit or push is part of that migration.

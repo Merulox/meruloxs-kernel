@@ -7,6 +7,12 @@ This file is read automatically by Warp agents and Claude Code.
 This repo is methodology-only. It contains briefs, role definitions, workflow protocols, and templates.
 It does not contain runnable production code. Do not create CLI scripts, services, or data pipelines here.
 
+## Kernel v2 candidate
+
+`v2/` is the provider-neutral replacement candidate. Read `v2/README.md` before designing new orchestration or methodology. v2 work must name its execution mode, risk tier, intent contract, and evidence path.
+
+The five-role v1 protocol below remains authoritative until the Direct, Fan-out, and Mission pilots in `v2/PILOTS.md` pass and merulox explicitly approves cutover. Do not silently mix v1 and v2. Aperture remains a viewer and Codex launcher during the pilot.
+
 ## The five roles
 
 | Role | Who | Does |

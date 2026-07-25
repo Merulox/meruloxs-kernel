@@ -54,3 +54,38 @@ Mark superseded decisions with `[SUPERSEDED by D-NNN]` at the top._
 **Alternatives considered:** Add Brand field — deferred; adds migration risk without clear discovery UI benefit for 2-brand v1.
 
 **Consequences:** Supplier serves double duty as brand. Revisit if cross-brand filtering becomes a UX requirement.
+
+
+---
+
+## Kernel decisions
+
+### D-003: Independent verifier owns executable acceptance oracle
+
+- **Date:** 2026-07-24
+- **Decided by:** product owner
+- **Status:** active
+
+**Context:** Agent-written implementation and tests can share the same blind spot. The gauntlet needs an oracle that is independent without turning implementation into a black-box guessing game.
+
+**Decision:** Roll out by tiered opt-in pilot. The executor receives the complete public behavioral specification, while an independent verifier owns executable acceptance checks and discloses only the failed public invariant plus a minimal counterexample.
+
+**Alternatives considered:** Architect writes every test — rejected as the throughput ceiling. Executor proposes tests for verifier approval — rejected because implementation framing leaks into the oracle. Fully visible checks — rejected because they invite example overfitting. Fully hidden requirements — rejected because they make legitimate failures opaque.
+
+**Consequences:** Public intent must be complete enough to implement without private checks. Verifier artifacts must be immutable to the executor. Repair feedback needs a structured failed invariant. Kernel-wide enforcement waits for calibrated pilot evidence.
+
+---
+
+### D-004: Hidden oracles require a hard mount boundary
+
+- **Date:** 2026-07-24
+- **Decided by:** product owner
+- **Status:** active
+
+**Context:** Aperture's current Codex sandbox restricts writes but does not prove that same-user home paths are unreadable. OMP worktrees isolate changes, not reads.
+
+**Decision:** Do not call an oracle hidden unless its storage path is absent from the executor's filesystem namespace. Use explicit-mount container or VM isolation for the pilot; prompt rules and FILES IT OWNS remain defense in depth only.
+
+**Alternatives considered:** Process-hidden same-user files — rejected because the agent can deliberately search for them. Visible checks until later — rejected because the Product Owner chose hard isolation now.
+
+**Consequences:** A rootless Podman spike proved the boundary and a real Codex edit, but production integration requires a dedicated provider-neutral adapter brief, disposable workspaces, credential indirection, pinned toolchains, host-owned evidence, and Kernel v2 pilot approval. The current Aperture launcher remains unchanged.

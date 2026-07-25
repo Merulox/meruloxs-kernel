@@ -1,0 +1,146 @@
+{
+  "title": "Agentic QA curriculum",
+  "goal": "Learn to replace low-leverage implementation review with trustworthy behavioral oracles, deterministic gates, and observable proof.",
+  "updated": "2026-07-24",
+  "source": "docs/research/agentic-qa-gauntlets-2026-07-24.md",
+  "phases": [
+    {
+      "id": "foundation",
+      "title": "Foundation",
+      "objective": "Own intent and make every completion claim falsifiable before increasing agent autonomy.",
+      "skills": [
+        {
+          "priority": 1,
+          "name": "Behavioral specification and oracle design",
+          "status": "active",
+          "why": "The entire gauntlet inherits the quality of its behavioral oracle.",
+          "competency": "Turn intent into positive, negative, boundary, and failure scenarios without prescribing implementation.",
+          "tools": ["Given / When / Then", "preconditions", "postconditions", "invariants"],
+          "firstExercise": "Write the acceptance contract and independent oracle for the first kernel gauntlet protocol."
+        },
+        {
+          "priority": 2,
+          "name": "Gherkin and structured requirements",
+          "status": "queued",
+          "why": "Executable natural-language specifications become the reviewed source of truth.",
+          "competency": "Write reusable scenarios whose outcomes can be executed without interpreting prose.",
+          "tools": ["Gherkin", "Cucumber", "EARS requirements"],
+          "firstExercise": "Convert one existing kernel DONE LOOKS LIKE section into executable scenarios."
+        },
+        {
+          "priority": 3,
+          "name": "CI gate engineering",
+          "status": "queued",
+          "why": "A constraint only matters when it fails closed and cannot be weakened by the executor.",
+          "competency": "Turn checks into reproducible non-zero exits, protected required checks, and retained evidence.",
+          "tools": ["GitHub Actions", "rulesets", "artifact retention", "fail-closed workflows"],
+          "firstExercise": "Create a machine-readable gate manifest for one real project."
+        },
+        {
+          "priority": 4,
+          "name": "Test architecture",
+          "status": "queued",
+          "why": "Unit, contract, integration, and end-to-end tests answer different questions.",
+          "competency": "Choose the smallest test layer that proves behavior while retaining a real end-to-end witness.",
+          "tools": ["unit tests", "contract tests", "integration tests", "end-to-end tests"],
+          "firstExercise": "Map one feature's acceptance criteria to the correct test layers."
+        }
+      ]
+    },
+    {
+      "id": "assurance",
+      "title": "Assurance",
+      "objective": "Measure whether tests detect faults and whether the real system satisfies the contract.",
+      "skills": [
+        {
+          "priority": 5,
+          "name": "Property-based testing",
+          "status": "queued",
+          "why": "Properties explore broad input spaces and expose boundaries example tests miss.",
+          "competency": "Express domain invariants, generate inputs, and interpret shrunk counterexamples.",
+          "tools": ["Hypothesis", "fast-check", "QuickCheck"],
+          "firstExercise": "Add a round-trip or state invariant to a suitable project module."
+        },
+        {
+          "priority": 6,
+          "name": "Mutation testing",
+          "status": "queued",
+          "why": "Coverage proves execution; mutation score tests whether assertions detect plausible faults.",
+          "competency": "Run diff-scoped campaigns, triage survivors, and distinguish equivalent mutants from real gaps.",
+          "tools": ["Stryker", "mutmut", "PIT", "mewt"],
+          "firstExercise": "Baseline one project's changed-code mutation score without enforcing a threshold."
+        },
+        {
+          "priority": 7,
+          "name": "Static and security gate design",
+          "status": "queued",
+          "why": "Deterministic rules catch recurring AI failure patterns cheaply and reproducibly.",
+          "competency": "Tune reliability, security, dependency, and secret checks without normalizing false positives.",
+          "tools": ["Semgrep", "CodeQL", "SonarQube", "OSV-Scanner", "Gitleaks"],
+          "firstExercise": "Define the zero-new-issues policy for agent-authored diffs."
+        },
+        {
+          "priority": 8,
+          "name": "Browser and API automation",
+          "status": "queued",
+          "why": "Agents often pass unit tests while the user-visible path remains broken.",
+          "competency": "Exercise the real interface and verify durable backend state, screenshots, or video.",
+          "tools": ["Playwright", "Puppeteer", "API contract tests", "state assertions"],
+          "firstExercise": "Capture before-and-after evidence for one production-shaped workflow."
+        }
+      ]
+    },
+    {
+      "id": "autonomy",
+      "title": "Autonomy",
+      "objective": "Calibrate the harness, contain unknown failures, and formalize only where the risk justifies it.",
+      "skills": [
+        {
+          "priority": 9,
+          "name": "Agent evaluation engineering",
+          "status": "queued",
+          "why": "The harness itself needs regression tests and measured reliability.",
+          "competency": "Build isolated tasks, reference solutions, deterministic graders, repeated trials, and calibrated rubrics.",
+          "tools": ["pass@k", "pass^k", "transcript review", "reference solutions"],
+          "firstExercise": "Create the first five tasks in a kernel harness regression suite."
+        },
+        {
+          "priority": 10,
+          "name": "Observability as a test oracle",
+          "status": "queued",
+          "why": "Logs, metrics, and traces can prove runtime constraints that source inspection cannot.",
+          "competency": "Express latency, error, and state expectations as queries against isolated or canary telemetry.",
+          "tools": ["OpenTelemetry", "PromQL", "LogQL", "TraceQL", "SLOs"],
+          "firstExercise": "Turn one service health claim into a machine-verifiable telemetry assertion."
+        },
+        {
+          "priority": 11,
+          "name": "Architecture fitness functions",
+          "status": "queued",
+          "why": "Mechanical boundaries prevent agent throughput from becoming architectural drift.",
+          "competency": "Encode dependency direction, boundary parsing, file-size, and design invariants as structural checks.",
+          "tools": ["dependency-cruiser", "ArchUnit", "AST rules", "schema validation"],
+          "firstExercise": "Choose one kernel golden principle and make its violation mechanically detectable."
+        },
+        {
+          "priority": 12,
+          "name": "Risk-based QA and sampling",
+          "status": "queued",
+          "why": "Human attention should follow impact and reversibility rather than review every implementation equally.",
+          "competency": "Assign risk tiers, audit random samples, and track false acceptance and false rejection rates.",
+          "tools": ["risk matrices", "random audit sampling", "escaped-defect tracking"],
+          "firstExercise": "Classify three recent tasks using the proposed Tier 0–3 matrix."
+        },
+        {
+          "priority": 13,
+          "name": "Formal methods literacy",
+          "status": "later",
+          "why": "Machine-checked proofs are the strongest gate for narrow, formalizable high-risk logic.",
+          "competency": "Recognize formalizable problems and model a small state machine or invariant without confusing proof with product intent.",
+          "tools": ["Dafny", "Verus", "TLA+"],
+          "firstExercise": "Model one small state transition only after the deterministic gauntlet is operational."
+        }
+      ]
+    }
+  ]
+}

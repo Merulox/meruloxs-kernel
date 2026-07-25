@@ -1,0 +1,103 @@
+schema_version: 2
+project: "replace-me"
+
+# Copy into the owning repository and replace every placeholder.
+# Commands run from project root unless cwd is provided.
+# Render only executor_visible_gates into worker contracts. Keep verifier_only_gates
+# and every oracle reference in verifier-owned storage outside executor namespaces.
+executor_visible_gates:
+  - id: format
+    command: "replace-with-format-check"
+    risk_tiers: [0, 1, 2, 3]
+    blocking: true
+    timeout_seconds: 60
+    artifact: null
+
+  - id: types
+    command: "replace-with-type-check"
+    risk_tiers: [0, 1, 2, 3]
+    blocking: true
+    timeout_seconds: 120
+    artifact: null
+
+  - id: lint
+    command: "replace-with-lint-command"
+    risk_tiers: [0, 1, 2, 3]
+    blocking: true
+    timeout_seconds: 120
+    artifact: null
+
+  - id: architecture
+    command: "replace-with-architecture-check"
+    risk_tiers: [1, 2, 3]
+    blocking: true
+    timeout_seconds: 120
+    artifact: null
+
+  - id: secret-scan
+    command: "replace-with-secret-scan"
+    risk_tiers: [0, 1, 2, 3]
+    blocking: true
+    timeout_seconds: 120
+    artifact: null
+
+  - id: targeted-tests
+    command: "replace-with-targeted-tests"
+    risk_tiers: [0, 1, 2, 3]
+    blocking: true
+    timeout_seconds: 300
+    artifact: null
+
+  - id: full-tests
+    command: "replace-with-full-relevant-suite"
+    risk_tiers: [1, 2, 3]
+    blocking: true
+    timeout_seconds: 900
+    artifact: null
+
+  - id: mutation
+    command: "replace-with-diff-scoped-mutation-command"
+    risk_tiers: [2, 3]
+    blocking: false
+    timeout_seconds: 1200
+    artifact: "replace-with-report-path"
+
+  - id: real-system
+    command: "replace-with-smoke-or-e2e-command"
+    risk_tiers: [0, 1, 2, 3]
+    blocking: true
+    timeout_seconds: 600
+    artifact: "replace-with-evidence-path"
+
+verifier_only_gates:
+  - id: protected-acceptance
+    requires_flag: independent_oracle
+    oracle_ref: "replace-with-verifier-owned-host-reference"
+    expected_oracle_hash: "replace-with-oracle-content-hash"
+    risk_tiers: [0, 1, 2, 3]
+    blocking: true
+    execution_phase: host_after_executor_exit
+    timeout_seconds: 900
+    result_schema:
+      verdict: "PASS | FAIL | ESCALATE"
+      failure_class: "null | implementation_failure | oracle_failure | ambiguous_requirement | environment_failure | runner_failure"
+      failed_public_invariant: "null | stable-public-invariant-id"
+      minimal_counterexample: "null | minimal-public-input-and-observed-output"
+    executor_disclosure: "verdict, failure_class, failed_public_invariant, and minimal_counterexample only"
+    artifact: "replace-with-host-owned-result-path"
+
+policy:
+  expensive_retry_limit: 2
+  forbid_inline_suppression_without_approval: true
+  require_raw_output_or_artifact: true
+  require_real_system_evidence: true
+  protected_oracle:
+    applies_when: independent_oracle
+    require_disposable_workspace: true
+    require_explicit_mount_allowlist: true
+    require_oracle_namespace_exclusion_proof: true
+    require_pinned_runtime_identity: true
+    require_credential_indirection: true
+    require_explicit_egress_policy: true
+    require_host_owned_evidence: true
+    forbid_oracle_source_path_content_disclosure: true
