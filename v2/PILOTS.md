@@ -61,7 +61,7 @@ All are required before v2 becomes active:
 - [ ] Evidence bundles allowed an uninvolved verifier to judge outcomes.
 - [ ] v2 reduced or justified human attention relative to v1.
 - [ ] Root agent instructions have a reviewed v2 cutover patch.
-- [ ] Aperture OMP adapter has its own impact analysis and brief.
+- [x] Aperture OMP shadow adapter has its own impact analysis, [brief](../../projects/aperture/docs/planning/AP-33-omp-shadow-adapter.md), and [evidence](pilots/K2-AD01-shadow/evidence.md).
 - [ ] Product Owner explicitly approves v2 activation and Aperture cutover.
 
 ## Aperture cutover gate
