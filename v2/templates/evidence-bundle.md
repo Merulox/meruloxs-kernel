@@ -119,6 +119,14 @@ For Fan-out or Mission mode, list worker run IDs, typed results, worktrees, and 
 
 ## Learning conversion
 
+- Observation and evidence reference:
+- Candidate hypotheses considered:
+- Weakest sufficient hypothesis:
+- Scope:
+- Assumptions:
+- Evidence count:
+- Falsifier or narrowing observation:
+- Supported invariant to protect:
 - Rule:
 - Skill:
 - Test/gate:

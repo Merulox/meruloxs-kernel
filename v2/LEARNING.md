@@ -4,9 +4,31 @@
 
 Kernel improves when failures become enforceable capabilities. More documentation alone is not learning.
 
+## Hypothesis selection
+
+Before converting an incident into a permanent control, separate induction from enforcement:
+
+1. Record the observation: the exact input, action, outcome, and evidence reference.
+2. Generate plausible hypotheses consistent with that observation.
+3. Apply Bennett's Razor: choose the weakest sufficient hypothesis — the least-specific
+   explanation supported by the evidence that still identifies an invariant worth protecting.
+4. Record its scope, assumptions, evidence count, and a future observation that would falsify
+   or narrow it.
+5. Only then choose an enforcement layer.
+
+Weakness is breadth of extension, not brevity, vagueness, or low confidence. Do not encode
+incidental tools, paths, models, values, or timing into a permanent rule unless evidence shows
+they are necessary. A single incident may justify a narrow regression check for the observed
+failure while leaving the broader explanatory hypothesis unpromoted.
+
+Security, authority, legal, and explicit safety invariants are not empirical hypotheses to
+weaken. When the cost of recurrence is high, a specific preventive control may be warranted
+before the causal explanation is settled; record that distinction.
+
 ## Failure conversion
 
-For every escaped defect, repeated correction, verifier finding, or avoidable blocker, ask in order:
+For every escaped defect, repeated correction, verifier finding, or avoidable blocker, first
+record the weakest sufficient failure hypothesis, then ask in order:
 
 1. Can a deterministic test or state check prevent recurrence?
 2. Can a lint, architecture rule, permission, or tool guard prevent it earlier?
@@ -17,6 +39,9 @@ For every escaped defect, repeated correction, verifier finding, or avoidable bl
 7. Is it truly one-off context that should remain only in the decision record?
 
 Choose the earliest enforceable layer. Do not turn every incident into permanent prompt text.
+
+The control must enforce the supported invariant, not an incident-specific story. Promote a
+more specific explanation only when additional evidence excludes the weaker one.
 
 ## Eval corpus
 
