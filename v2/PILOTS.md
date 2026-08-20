@@ -9,7 +9,7 @@ Kernel v2 is a candidate. v1 remains active until all exit criteria pass and the
 | Pilot | Real task shape | Required proof | Status |
 |---|---|---|---|
 | K2-P01 | Direct: tightly coupled work completed by one accountable lead | Intent, gates, real outcome, evidence bundle | [verified](pilots/K2-P01-direct/evidence.md) — bootstrap |
-| K2-P02 | Fan-out: at least two genuinely independent leaves | Worker contracts, isolation, typed results, integration evidence | pending real task |
+| K2-P02 | Fan-out: at least two genuinely independent leaves | Worker contracts, isolation, typed results, integration evidence | [verified](pilots/K2-P02-genesis-takeover/evidence.md) — Genesis cancellation/takeover |
 | K2-P03 | Mission: at least two milestones with a validation barrier | PO-approved intent, milestone DAG, fresh workers, repair/escalation record | pending real task |
 
 Routine mode is validated separately on the first repeated workflow proposed for migration. It is not a prerequisite for replacing the coding-task protocol.
